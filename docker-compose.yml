@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  apache:
+    image: php:7.3.3-apache
+    container_name: apache
+    restart: unless-stopped
+    ports:
+      - 86:80
+    environment:
+      - DROPBOX_CLIENT_ID=${DROPBOX_CLIENT_ID}
+      - DROPBOX_CLIENT_SECRET=${DROPBOX_CLIENT_SECRET}
+      - DROPBOX_ACCESS_TOKEN=${DROPBOX_ACCESS_TOKEN}
+      - MS_GRAPH_TENTANT_ID=${MS_GRAPH_TENTANT_ID}
+      - MS_GRAPH_CLIENT_ID=${MS_GRAPH_CLIENT_ID}
+      - MS_GRAPH_CLIENT_SECRET=${MS_GRAPH_CLIENT_SECRET}
+    volumes:
+      - .:/var/www
