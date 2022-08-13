@@ -1,2 +1,2 @@
-# php-backup-files-to-dropbox
-Backup files do Dropbox using PHP
+# SBackup
+A small way to generate and send backups to somewhere like onedrive or dropbox using PHP
