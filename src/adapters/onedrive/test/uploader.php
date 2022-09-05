@@ -94,7 +94,7 @@ class UploaderClass
      */
     private function nextChunk(string $uploadUrl, int $fileSize, $chunk)
     {
-        echo "Progress: $this->largeFileUploadProgress / $fileSize<br>";
+        //echo "Progress: $this->largeFileUploadProgress / $fileSize<br>";
 
         $lastBytePos = $this->largeFileUploadProgress + strlen($chunk) - 1;
         $headers = array(
