@@ -33,10 +33,22 @@ echo "Access Token: " . $accessToken . "<hr>";
 $graph = new Graph();
 $graph->setAccessToken($accessToken);
 
-$file = __DIR__ . '/../../../html/toUpload/DJI_0053.DNG';
+//$fileName = "DJI_0053.DNG";
+//$fileName = "small.txt";
+$fileName = "DJI_0004.MOV";
 
-$uploader = new UploaderClass($graph, "/users/$userId");
-$uploader->uploadLargeItem("root", "DJI_0053.DNG", $file);
+$file = __DIR__ . "/../../../html/toUpload/$fileName";
+
+$uploader = new UploaderClass($graph, "users/$userId");
+try {
+    $uploader->uploadLargeItem("root", "Backups/$fileName", $file);
+} catch (Exception $e) {
+     die ( $e->getMessage() );
+}
+
+// https://stonebasyx-my.sharepoint.com/:f:/p/genilto/En8biI1FaR5LvBdCe3dZCw0BqvI_UPtv_tduJbdM-a8PMA?e=yCTGYD
+
+
 
 // Upload small file / Single session
 // $graph->createRequest("PUT", "/users/genilto@stonebasyx.com/drive/root/children/teste.txt/content")

@@ -10,12 +10,13 @@ class UploaderClass
 {
     protected $graph;
     protected $rootFolder;
-    /** @var int $chunkSize */
-    private $chunkSize;
+
     /** @var int $largeFileUploadProgress */
     private $largeFileUploadProgress;
+
     /** @var int $currentLargeFileRetryInterval */
     private $currentLargeFileRetryInterval;
+
     // If we get a server error, retry for a maximum of 10 times in the intervals below (in seconds)
     private $retryIntervals = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34];
 
@@ -24,11 +25,10 @@ class UploaderClass
         $this->graph = $graph;
         $this->largeFileUploadProgress = 0;
         $this->currentLargeFileRetryInterval = 0;
+        $this->rootFolder = 'me/drive';
 
         if (!empty($rootFolder)) {
             $this->rootFolder = $rootFolder;
-        } else {
-            $this->rootFolder = 'groups/GROUP_ID';
         }
     }
 
@@ -39,6 +39,11 @@ class UploaderClass
     {
         // Optimal chunk size is 5-10MiB and should be a multiple of 320 KiB
         $chunkSizeBytes = 10485760; // is 10 MiB
+
+        if (!file_exists($filesrc)) {
+            throw new \Exception('Source file not found');
+        }
+
         $fileSize = filesize($filesrc);
         $options = [
             'item' => ['@microsoft.graph.conflictBehavior' => 'rename']
@@ -87,13 +92,10 @@ class UploaderClass
      * Got inspiration from:
      * https://github.com/googleapis/google-api-php-client/blob/master/src/Google/Http/MediaFileUpload.php#L113-L141
      */
-    private function nextChunk(string $uploadUrl, int $fileSize, $chunk = false)
+    private function nextChunk(string $uploadUrl, int $fileSize, $chunk)
     {
-        echo "$chunk<br>";
-        if (false == $chunk) {
-            $chunk = substr(null, $this->largeFileUploadProgress, $this->chunkSize);
-        }
-        echo "after: $chunk<br>";
+        echo "Progress: $this->largeFileUploadProgress / $fileSize<br>";
+
         $lastBytePos = $this->largeFileUploadProgress + strlen($chunk) - 1;
         $headers = array(
             'Content-Range' => "bytes $this->largeFileUploadProgress-$lastBytePos/$fileSize",
