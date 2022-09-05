@@ -14,5 +14,6 @@ services:
       - MS_GRAPH_TENTANT_ID=${MS_GRAPH_TENTANT_ID}
       - MS_GRAPH_CLIENT_ID=${MS_GRAPH_CLIENT_ID}
       - MS_GRAPH_CLIENT_SECRET=${MS_GRAPH_CLIENT_SECRET}
+      - MS_GRAPH_USER_ID=${MS_GRAPH_USER_ID}
     volumes:
       - .:/var/www
