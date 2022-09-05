@@ -6,7 +6,7 @@ use Microsoft\Graph\Model\DriveItem;
 use Microsoft\Graph\Http\GraphResponse;
 use Microsoft\Graph\Model\UploadSession;
 
-class DemoClass
+class UploaderClass
 {
     protected $graph;
     protected $rootFolder;
@@ -19,12 +19,17 @@ class DemoClass
     // If we get a server error, retry for a maximum of 10 times in the intervals below (in seconds)
     private $retryIntervals = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34];
 
-    public function __construct(Graph $graph)
+    public function __construct(Graph $graph, $rootFolder = '')
     {
         $this->graph = $graph;
-        $this->rootFolder = 'groups/GROUP_ID';
         $this->largeFileUploadProgress = 0;
         $this->currentLargeFileRetryInterval = 0;
+
+        if (!empty($rootFolder)) {
+            $this->rootFolder = $rootFolder;
+        } else {
+            $this->rootFolder = 'groups/GROUP_ID';
+        }
     }
 
     /**
@@ -61,7 +66,7 @@ class DemoClass
         // that has been uploaded.
         $result = false;
         if ($status !== false) {
-            /** @var Model\DriveItem */
+            /** @var DriveItem */
             $result = $status;
         }
 
@@ -84,9 +89,11 @@ class DemoClass
      */
     private function nextChunk(string $uploadUrl, int $fileSize, $chunk = false)
     {
+        echo "$chunk<br>";
         if (false == $chunk) {
             $chunk = substr(null, $this->largeFileUploadProgress, $this->chunkSize);
         }
+        echo "after: $chunk<br>";
         $lastBytePos = $this->largeFileUploadProgress + strlen($chunk) - 1;
         $headers = array(
             'Content-Range' => "bytes $this->largeFileUploadProgress-$lastBytePos/$fileSize",
@@ -103,7 +110,7 @@ class DemoClass
             $uploadUrl,
             [
                 'headers' => $headers,
-                'body' => \GuzzleHttp\Psr7\stream_for($chunk),
+                'body' => \GuzzleHttp\Psr7\Utils::streamFor($chunk),
                 'timeout' => 90
             ]
         );
@@ -148,7 +155,7 @@ class DemoClass
                     $response->getHeaders()
                 );
     
-                $item = $response->getResponseAsObject(Model\DriveItem::class);
+                $item = $response->getResponseAsObject(DriveItem::class);
                 return $item;
             }
 
