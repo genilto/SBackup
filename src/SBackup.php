@@ -1,5 +1,9 @@
 <?php
 
+namespace genilto\sbackup;
+
+use Psr\Log\LoggerInterface;
+
 class SBackup {
 
     /**
@@ -22,7 +26,7 @@ class SBackup {
      * @param UploaderInterface $uploader
      * @param LoggerInterface $logger (optional)
      */
-    public function __construct ($uploader, $logger = null) {
+    public function __construct (UploaderInterface $uploader, LoggerInterface $logger = null) {
         $this->uploader = $uploader;
         $this->logger = $logger;
     }
@@ -42,7 +46,7 @@ class SBackup {
      * @return bool true when success
      */
     public function upload () {
-        
+        echo "Upload using " . $this->uploader->getAdapterName();
     }
 }
 
