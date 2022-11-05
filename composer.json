@@ -2,7 +2,7 @@
     "name": "genilto/sbackup",
     "description": "A small layer created to abstract the ways to send backups to different cloud services with php.",
     "homepage": "https://github.com/genilto/sbackup",
-    "license": "GNU",
+    "license": "MIT",
     "keywords": [
         "adapter",
         "backup",
