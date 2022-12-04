@@ -4,103 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8f55fbdcbb11b296e40d62007bb33b8",
+    "content-hash": "4f897e904fe592bd25a5b59231b1f1c7",
     "packages": [
         {
-            "name": "analog/analog",
-            "version": "1.0.19-stable",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jbroadway/analog.git",
-                "reference": "53afd53b77bf911d926e5b895484a3fed3479aee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jbroadway/analog/zipball/53afd53b77bf911d926e5b895484a3fed3479aee",
-                "reference": "53afd53b77bf911d926e5b895484a3fed3479aee",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "psr/log": "^1.0.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Analog": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Johnny Broadway",
-                    "email": "johnny@johnnybroadway.com",
-                    "homepage": "http://www.johnnybroadway.com/"
-                }
-            ],
-            "description": "Fast, flexible, easy PSR-3-compatible PHP logging package with dozens of handlers.",
-            "homepage": "https://github.com/jbroadway/analog",
-            "keywords": [
-                "PSR3",
-                "alerts",
-                "amon",
-                "apprise",
-                "chrome-logger",
-                "console",
-                "debug",
-                "debugging",
-                "error",
-                "errors",
-                "firephp",
-                "gelf",
-                "log",
-                "logger",
-                "logging",
-                "logs",
-                "monitor",
-                "monitoring",
-                "psr-3",
-                "stderr",
-                "syslog"
-            ],
-            "support": {
-                "issues": "https://github.com/jbroadway/analog/issues",
-                "source": "https://github.com/jbroadway/analog/tree/1.0.19-stable"
-            },
-            "time": "2021-11-05T03:59:12+00:00"
-        },
-        {
             "name": "psr/log",
-            "version": "1.1.4",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                    "Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -121,9 +52,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
-            "time": "2021-05-03T11:20:27+00:00"
+            "time": "2021-07-14T16:46:02+00:00"
         }
     ],
     "packages-dev": [
