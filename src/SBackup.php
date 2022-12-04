@@ -11,6 +11,16 @@ use \genilto\sbackup\store\DataStoreInterface;
 class SBackup {
 
     /**
+     * @var int $MAX_UPLOAD_TRIES
+     */
+    public static int $MAX_UPLOAD_TRIES = 3;
+
+    /**
+     * @var int $SECONDS_BETWEEN_TRIES
+     */
+    public static int $SECONDS_BETWEEN_TRIES = 5;
+
+    /**
      * The uploader
      * 
      * @var UploaderInterface
@@ -75,11 +85,16 @@ class SBackup {
      * @throws Exception
      */
     public function upload( string $filesrc, string $folderId, string $filename, bool $deleteSourceAfterUpload = false ) {
+        $this->tryUpload( $filesrc, $folderId, $filename, $deleteSourceAfterUpload, 1 );
+    }
+
+    private function tryUpload ( string $filesrc, string $folderId, string $filename, bool $deleteSourceAfterUpload, int $tryNumber ) {
         $context = [
             '$filesrc' => $filesrc,
             '$folderId' => $folderId,
             '$filename' => $filename,
-            '$deleteSourceAfterUpload' => $deleteSourceAfterUpload
+            '$deleteSourceAfterUpload' => $deleteSourceAfterUpload,
+            '$tryNumber' => $tryNumber
         ];
 
         $this->logger->logInfo ('upload', "New Upload", $context);
@@ -99,7 +114,17 @@ class SBackup {
             }
         } catch (Exception $e) {
             $this->logger->logError ('upload', $e->getMessage(), $context);
-            throw $e;
+
+            // If reach the MAX tries, must abort the process
+            if ($tryNumber >= self::$MAX_UPLOAD_TRIES) {
+                throw $e;
+            }
+
+            $secondsToWait = (self::$SECONDS_BETWEEN_TRIES * $tryNumber);
+            $this->logger->logError ('upload', "Trying the upload again after " . $secondsToWait . " seconds", $context);
+            @sleep( $secondsToWait );
+
+            $this->tryUpload( $filesrc, $folderId, $filename, $deleteSourceAfterUpload, ($tryNumber + 1) );
         }
     }
 }
