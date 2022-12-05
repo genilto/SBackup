@@ -1,6 +1,6 @@
 <?php
 
-namespace genilto\sbackup\interface;
+namespace genilto\sbackup;
 
 interface UploaderInterface
 {
@@ -32,7 +32,7 @@ interface UploaderInterface
      * 
      * @return string file name
      * 
-     * @throws Exception
+     * @throws SBackupException
      */
     public function upload( string $filesrc, string $folderId, string $filename );
 }

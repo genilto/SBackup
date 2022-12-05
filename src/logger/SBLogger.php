@@ -11,7 +11,7 @@ class SBLogger {
      * 
      * @var LoggerInterface $logger
      */
-    private LoggerInterface $logger;
+    private $logger;
 
     /**
      * Define the log level
@@ -21,7 +21,7 @@ class SBLogger {
      * 3 - Full Logging
      * @var int $logLevel
      */
-    private int $logLevel;
+    private $logLevel;
 
     /**
      * Instantiate the class

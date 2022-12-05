@@ -34,11 +34,6 @@ class FileDataStore implements DataStoreInterface
         }
         $fileData = @unserialize($FILE_DATA_STORE_DATA);
         if (isset($fileData) && is_array($fileData)) {
-            
-            // echo "<pre>";
-            // print_r($fileData);
-            // echo "</pre>";
-
             return $fileData;
         }
         return array();
@@ -62,10 +57,9 @@ class FileDataStore implements DataStoreInterface
 
     /**
      * Set a value in the store
+     * 
      * @param string $key   Data Key
      * @param string $value Data Value
-     *
-     * @return void
      */
     public function set($key, $value = null)
     {
