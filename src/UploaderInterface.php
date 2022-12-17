@@ -30,7 +30,7 @@ interface UploaderInterface
      * @param string $folderId Destination folder id
      * @param string $filename Filename
      * 
-     * @return string file name
+     * @return SBackupFileMetadata file information
      * 
      * @throws SBackupException
      */

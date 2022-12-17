@@ -80,7 +80,7 @@ class SBackup {
      * @param string $folderId Destination folder id
      * @param string $filename Filename
      * 
-     * @return string fileName
+     * @return SBackupFileMetadata file information
      * 
      * @throws Exception
      */
@@ -100,9 +100,9 @@ class SBackup {
         $this->logger->logInfo ('upload', "New Upload", $context);
         
         try {
-            $uploadedFilename = $this->uploader->upload( $filesrc, $folderId, $filename );
+            $uploadedFile = $this->uploader->upload( $filesrc, $folderId, $filename );
             
-            $context['$uploadedFilename'] = $uploadedFilename;
+            $context['$uploadedFile'] = $uploadedFile;
             $this->logger->logInfo ('upload', "File uploaded successfully", $context);
 
             if ($deleteSourceAfterUpload) {
@@ -113,7 +113,7 @@ class SBackup {
                 }
             }
 
-            return $uploadedFilename;
+            return $uploadedFile;
 
         } catch (SBackupException $e) {
             $this->logger->logError ('upload', $e->getMessage(), $context);
