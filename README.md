@@ -231,7 +231,7 @@ require_once ( __DIR__ . '/backup.config.php' );
  */
 function getUploadErrorDescription ($uploadErrorCode) {
     $phpFileUploadErrors = array(
-        //0 => 'There is no error, the file uploaded with success',
+        0 => 'There is no error, the file uploaded with success',
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
         3 => 'The uploaded file was only partially uploaded',
@@ -241,8 +241,8 @@ function getUploadErrorDescription ($uploadErrorCode) {
         8 => 'A PHP extension stopped the file upload.',
     );
 
-    if (isset($uploadErrorCode[$phpFileUploadErrors])) {
-        return $uploadErrorCode[$phpFileUploadErrors];
+    if (isset($phpFileUploadErrors[$uploadErrorCode])) {
+        return $phpFileUploadErrors[$uploadErrorCode];
     }
     return false;
 }
@@ -284,11 +284,20 @@ if (isset($_POST["doupload"]) && $_POST["doupload"] == "YES") {
         /**
          * @var genilto\sbackup\SBackup $SBackup
          */
+
+        $year = date("Y");
+        $month = date("m");
+        $destinationFolder = "/backups/$year/$month/";
         try {
-            $uploadedFileName = $SBackup->upload($filePath, "/", $filename, false);
-            echo "File <b>$uploadedFileName</b> uploaded to Dropbox!";
+            /**
+             * @var \genilto\sbackup\models\SBackupFileMetadata $uploadedFile
+             */
+            $uploadedFile = $SBackup->upload($filePath, $destinationFolder, $filename, false);
+            echo "<b>Result:</b> File <b>" . $uploadedFile->getName() . "</b> uploaded to Dropbox!<br><br>";
+            echo "<b>Details:</b> " . $uploadedFile->toString();
+
         } catch (Exception $e) {
-            echo $e->getMessage();
+            echo "<b>ERROR: </b>" . $e->getMessage();
         }
     } else {
         echo "File must be informed!";
