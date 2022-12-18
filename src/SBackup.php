@@ -79,6 +79,7 @@ class SBackup {
      * @param string $filesrc Source file path to be upoloaded
      * @param string $folderId Destination folder id
      * @param string $filename Filename
+     * @param bool $deleteSourceAfterUpload If it should delete the source file after a successfull upload
      * 
      * @return SBackupFileMetadata file information
      * 
@@ -88,6 +89,19 @@ class SBackup {
         return $this->tryUpload( $filesrc, $folderId, $filename, $deleteSourceAfterUpload, 1 );
     }
 
+    /**
+     * Upload a file using the uploader
+     * 
+     * @param string $filesrc Source file path to be upoloaded
+     * @param string $folderId Destination folder id
+     * @param string $filename Filename
+     * @param bool $deleteSourceAfterUpload If it should delete the source file after a successfull upload
+     * @param int $tryNumber The number of tries already executed
+     * 
+     * @return SBackupFileMetadata file information
+     * 
+     * @throws Exception
+     */
     private function tryUpload ( string $filesrc, string $folderId, string $filename, bool $deleteSourceAfterUpload, int $tryNumber ) {
         $context = [
             '$filesrc' => $filesrc,
@@ -97,8 +111,14 @@ class SBackup {
             '$tryNumber' => $tryNumber
         ];
 
-        $this->logger->logInfo ('upload', "New Upload", $context);
-        
+        $this->logger->logInfo ('upload', "Starting Upload", $context);
+
+        // Check if the source file exists
+        if (!file_exists($filesrc)) {
+            $this->logger->logError ('upload', "Source File not found!", $context);
+            throw new SBackupException ("Source File not found!");
+        }
+
         try {
             $uploadedFile = $this->uploader->upload( $filesrc, $folderId, $filename );
             
