@@ -33,7 +33,7 @@ class SBackupFileMetadata
     protected $full_path;
 
     /**
-     * Constructor
+     * Constructor of class
      * 
      * @param string $id
      * @param string $name
