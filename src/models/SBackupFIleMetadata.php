@@ -87,7 +87,7 @@ class SBackupFileMetadata
      */
     public function getFullPath()
     {
-        return $this->path_display;
+        return $this->full_path;
     }
 
     /**
