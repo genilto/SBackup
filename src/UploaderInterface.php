@@ -30,7 +30,7 @@ interface UploaderInterface
      * @param string $folderId Destination folder id
      * @param string $filename Filename
      * 
-     * @return SBackupFileMetadata file information
+     * @return \genilto\sbackup\models\SBackupFileMetadata file information
      * 
      * @throws SBackupException
      */

@@ -102,7 +102,7 @@ class SBackup {
         try {
             $uploadedFile = $this->uploader->upload( $filesrc, $folderId, $filename );
             
-            $context['$uploadedFile'] = $uploadedFile;
+            $context['$uploadedFile'] = $uploadedFile->toString();
             $this->logger->logInfo ('upload', "File uploaded successfully", $context);
 
             if ($deleteSourceAfterUpload) {
