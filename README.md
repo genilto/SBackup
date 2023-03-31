@@ -6,20 +6,20 @@ A small way to generate and send backups to somewhere like onedrive or dropbox u
 
 ## Adapters
 
-SBackup does nothing without an adapter. Bellow are the implemented adapers until now. 
+SBackup does nothing without an adapter. Bellow are the implemented adapers until now.
 You need to require one of above adapters to be able to use in your project.
 
 ## SBackup-Dropbox
 
 Adapter to work with dropbox api.
 
-https://github.com/genilto/sbackup-dropbox
+<https://github.com/genilto/sbackup-dropbox>
 
 ## SBackup-Onedrive
 
 Adapter to work with onedrive api.
 
-https://github.com/genilto/sbackup-onedrive
+<https://github.com/genilto/sbackup-onedrive>
 
 ## Install
 
@@ -35,7 +35,7 @@ It will install all the dependencies you need to work with dropbox, including ou
 
 Below is a simple example of how you can use the library. Be creative on you own project.
 If you want, you can clone the examples from repository:
-https://github.com/genilto/sbackup-example
+<https://github.com/genilto/sbackup-example>
 
 ### Test environment
 
@@ -75,15 +75,15 @@ Now create another folder called **html** and inside create a file called **inde
 <title>SBackup tests!</title>
 </head>
 <body>
-	<div  style="padding: 50px; text-align: center; max-width: 500px; margin: auto;">
-		<h1  style="padding: 20px;">SBackup <small>Tests</small></h1>
-		<div>
-			<a href="auth.php">1 - Go to Authentication page</a>
-		</div>
-		<div>
-			<a href="upload.php">2 - Go to Upload page</a>
-		</div>
-	</div>
+ <div  style="padding: 50px; text-align: center; max-width: 500px; margin: auto;">
+  <h1  style="padding: 20px;">SBackup <small>Tests</small></h1>
+  <div>
+   <a href="auth.php">1 - Go to Authentication page</a>
+  </div>
+  <div>
+   <a href="upload.php">2 - Go to Upload page</a>
+  </div>
+ </div>
 </body>
 </html>
 ```
@@ -120,21 +120,21 @@ date_default_timezone_set(Analog::$timezone);
 
 if (!function_exists('createDefaultLogger')) {
 
-	/**
-	* Creates the default logger using Analog as Logger class
-	* Any other PSR-3 Logger could be used
-	*
-	* @return  SBLogger
-	*/
-	function  createDefaultSBackupLogger () {
-		// Creates the Default Logger
-		$logger =  new  Logger();
-		// Define where to save the logs
-		$currentDate =  date("Y-m-d");
-		$logger->handler (__DIR__  .  "/$currentDate-sbackup.log");
-		// Return a SBLogger instance
-		return  new  SBLogger($logger, 3); // 3 - Full Logging
-	}
+ /**
+ * Creates the default logger using Analog as Logger class
+ * Any other PSR-3 Logger could be used
+ *
+ * @return  SBLogger
+ */
+ function  createDefaultSBackupLogger () {
+  // Creates the Default Logger
+  $logger =  new  Logger();
+  // Define where to save the logs
+  $currentDate =  date("Y-m-d");
+  $logger->handler (__DIR__  .  "/$currentDate-sbackup.log");
+  // Return a SBLogger instance
+  return  new  SBLogger($logger, 3); // 3 - Full Logging
+ }
 }
 
 /**
@@ -193,22 +193,22 @@ require_once ( __DIR__  .  '/backup.config.php' );
 <title><?php  echo $SBackup->getAdapterName(); ?> - Authentication</title>
 </head>
 <body>
-	<div  style="padding: 50px; text-align: center; max-width: 500px; margin: auto;">
-		<h1  style="padding: 20px;">SBackup <small>Configuration</small></h1>
-		<?php
-		/**
-		* Starts the authorization flow according to the adapter being used
-		* 
-		* @var  SBackup $SBackup
-		*/
-		$SBackup->authorizationFlow();
-		?>
-	</div>
+ <div  style="padding: 50px; text-align: center; max-width: 500px; margin: auto;">
+  <h1  style="padding: 20px;">SBackup <small>Configuration</small></h1>
+  <?php
+  /**
+  * Starts the authorization flow according to the adapter being used
+  * 
+  * @var  SBackup $SBackup
+  */
+  $SBackup->authorizationFlow();
+  ?>
+ </div>
 </body>
 </html>
 ```
 
-If you want to test the authentication right now, you can navigate to [http://localhost:86/auth.php](http://localhost:86/auth.php) 
+If you want to test the authentication right now, you can navigate to [http://localhost:86/auth.php](http://localhost:86/auth.php)
 
 There you must follow the instructions.
 
@@ -312,8 +312,8 @@ if (isset($_POST["doupload"]) && $_POST["doupload"] == "YES") {
             </form>
         </div>
         <div style="padding: 10px;">
-		    <a href="index.php">Back</a>
-	    </div>
+      <a href="index.php">Back</a>
+     </div>
     </div>
 </body>
 </html>
