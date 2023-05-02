@@ -49,9 +49,6 @@ class SBLogger {
             return;
         }
         $error = $errorMessage;
-        if (!empty($this->tag)) {
-            $context["tag"] = $this->tag;
-        }
         if (count($context) > 0) {
             $error .= ' | CONTEXT: {data}';
         }
